@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import Card from "./Card";
 export default function Board() {
     const [images, setImages] = useState([]);
-    const cards = [];
+    // const [cards, setCards] = useState(() => {
+    //     const tempArr = [];
+
+    //     images.forEach((image) => {
+    //         tempArr.push([<Card url={image.url} key={image.id}></Card>]);
+    //     });
+    //     return tempArr;
+    // });
     const url =
-        "https://api.giphy.com/v1/gifs/search?api_key=5uqzcl3bsOYTjDU8BbWbxL4aSsZM72ek&q=cat&limit=10";
+        "https://api.giphy.com/v1/gifs/search?api_key=xYzMNjTJ1U7X3A87MGYaKRyoout57quD&q=cat&limit=10";
 
     async function fetchGif(url) {
         console.log("Fetching...");
@@ -28,17 +35,36 @@ export default function Board() {
     useEffect(() => {
         console.log("Effecting...");
         fetchGif(url).then(handleData);
-    }, []);
-
-    images.forEach((image) => {
-        cards.push([<Card url={image.url} key={image.id}></Card>]);
-    });
+    }, [url]);
+    // function startGame() {
+    //     const tempArr = [];
+    //     images.forEach((image) => {
+    //         tempArr.push([
+    //             <Card
+    //                 url={image.url}
+    //                 key={image.id}
+    //                 cards={cards}
+    //                 setCards={setCards}
+    //             ></Card>,
+    //         ]);
+    //     });
+    //     setCards([...tempArr]);
+    //     document.querySelector("#start-btn").style.display = "none";
+    // }
+    console.log(images);
 
     return (
         <>
-            <h1>Memory Card Game</h1>
-            <p>Click on any cat image, but don't click the same image twice</p>
-            {cards}
+            {images.map((image) => {
+                return (
+                    <Card
+                        url={image.url}
+                        key={image.id}
+                        images={images}
+                        setImages={setImages}
+                    ></Card>
+                );
+            })}
         </>
     );
 }

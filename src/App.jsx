@@ -7,6 +7,9 @@ import "./App.css";
 function App() {
     return (
         <>
+            <h1>Memory Card Game</h1>
+            <p>Click on any cat image, but don't click the same image twice</p>
+
             <Board />
         </>
     );
