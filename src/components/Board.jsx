@@ -27,7 +27,7 @@ export default function Board() {
     }
     useEffect(() => {
         fetchGif(url).then(handleData);
-    }, [url]);
+    }, []);
     const shuffleArray = (arr) => {
         const newArr = arr.slice();
         for (let i = newArr.length - 1; i > 0; i--) {
